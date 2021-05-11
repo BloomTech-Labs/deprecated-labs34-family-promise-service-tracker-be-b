@@ -1,13 +1,13 @@
 exports.up = (knex) => {
   return knex.schema.createTable('service_types', function (tbl) {
-    tbl.increments('id').primary();
-    tbl.string('name').notNullable().unique();
+    tbl.increments('service_type_id').primary();
+    tbl.string('name', 128).notNullable().unique();
     tbl.text('description');
     tbl
       .integer('program_id')
       .unsigned()
       .notNullable()
-      .references('id')
+      .references('program_id')
       .inTable('programs')
       .onUpdate('CASCADE')
       .onDelete('CASCADE');

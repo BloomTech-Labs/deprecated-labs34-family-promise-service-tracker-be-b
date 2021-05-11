@@ -1,7 +1,7 @@
 exports.up = (knex) => {
   return knex.schema.createTable('statuses', function (tbl) {
-    tbl.increments('id').primary();
-    tbl.string('name').notNullable().unique();
+    tbl.increments('status_id').primary();
+    tbl.string('status').notNullable().unique();
     tbl.timestamps(true, true);
   });
 };
