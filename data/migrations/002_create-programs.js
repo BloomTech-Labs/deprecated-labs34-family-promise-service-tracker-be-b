@@ -9,8 +9,6 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-
-
   return knex.schema.dropTableIfExists('programs_users').then(() => {
     return knex.schema.dropTableIfExists('programs')
   })

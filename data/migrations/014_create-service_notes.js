@@ -10,7 +10,6 @@ exports.up = function(knex) {
         .inTable('service_entries')
         .onUpdate('RESTRICT')
         .onDelete('RESTRICT');
-
         tbl
         .string('profile_id')
         .unsigned()
