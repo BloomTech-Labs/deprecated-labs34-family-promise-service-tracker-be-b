@@ -1,27 +1,43 @@
 const faker = require('faker');
 
-const providers = [
-  '00uk9lxaulDYOiB4H5d6',
-  '00unr48onuAmU9sxK5d6',
-  '00unr8nm2sJkxkcrH5d6',
+const entries = [
+  {
+    service_entries_id: 1,
+    service_type_id: 1,
+    recipient_id: 1,
+    location_id: 1,
+    status_id: 2,
+    quantity: 3,
+    value: 100.00,
+  },
+  {
+    service_entries_id: 2,
+    service_type_id: 2,
+    recipient_id: 2,
+    location_id: 2,
+    status_id: 4,
+    quantity: 3,
+    value: 425.00,
+  },
+  {
+    service_entries_id: 3,
+    service_type_id: 3,
+    recipient_id: 3,
+    location_id: 3,
+    status_id: 2,
+    quantity: 3,
+    value: 250.00,
+  },
+  {
+    service_entries_id: 4,
+    service_type_id: 2,
+    recipient_id: 4,
+    location_id: 4,
+    status_id: 3,
+    quantity: 3,
+    value: 500.00,
+  },
 ];
-
-const getRand = (max) => {
-  return Math.floor(Math.random() * max) + 1;
-};
-
-const entries = [...new Array(20)].map(() => ({
-  service_type_id: getRand(3),
-  provided_at: faker.date.past(),
-  notes: faker.lorem.sentence(),
-  quantity: 1,
-  recipient: faker.name.findName(),
-  location: faker.fake(
-    '{{address.streetAddress}}, {{address.city}}, {{address.stateAbbr}} {{address.zipCode}}'
-  ),
-  status_id: getRand(4),
-  provider_id: providers[getRand(3) - 1],
-}));
 
 exports.seed = function (knex) {
   return knex('service_entries').insert(entries);

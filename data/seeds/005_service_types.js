@@ -1,15 +1,18 @@
 const service_types = [
   {
+    service_type_id: 1,
     name: 'Bus Passes',
     description: 'Provides city bus passes for work programs',
     program_id: 1,
   },
   {
+    service_type_id: 2,
     name: 'Rental Assitance',
     description: 'Provides monthly rental assistance to prevent foreclosure',
     program_id: 3,
   },
   {
+    service_type_id: 3,
     name: 'Childcare',
     description: 'Provides K-12 childcare support',
     program_id: 2,
