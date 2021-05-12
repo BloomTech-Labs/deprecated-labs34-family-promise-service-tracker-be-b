@@ -16,5 +16,7 @@ exports.up = (knex) => {
 };
 
 exports.down = (knex) => {
-  return knex.schema.dropTableIfExists('service_types');
-};
+  return knex.schema.dropTableIfExists('service_providers').then(() => {
+    return knex.schema.dropTableIfExists('service_types')
+  })
+}

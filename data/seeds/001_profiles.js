@@ -4,7 +4,7 @@ const profiles = [
     email: 'bg_user@gmail.com',
     firstName: 'bg_user',
     lastName: 'basic',
-    role_id: 1,
+    role: 'administrator',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'bg_user basic'
     )}.svg`,
@@ -14,7 +14,7 @@ const profiles = [
     email: 'fp.servicetracker+admin@gmail.com',
     firstName: 'Abigail',
     lastName: 'Administrator',
-    role_id: 1,
+    role: 'administrator',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'Abigail Administrator'
     )}.svg`,
@@ -24,7 +24,7 @@ const profiles = [
     email: 'fp.servicetracker+program@gmail.com',
     firstName: 'Patty',
     lastName: 'Program',
-    role_id: 2,
+    role: 'program_manager',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'Patty Program'
     )}.svg`,
@@ -34,7 +34,7 @@ const profiles = [
     email: 'fp.servicetracker+service@gmail.com',
     firstName: 'Sally',
     lastName: 'Service',
-    role_id: 3,
+    role: 'service_provider',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'Sally Service'
     )}.svg`,
@@ -44,7 +44,7 @@ const profiles = [
     email: 'fp.servicetracker+unassigned@gmail.com',
     firstName: 'Gary',
     lastName: 'Jerry',
-    role_id: 3,
+    role: 'service_provider',
     avatarUrl: `https://avatars.dicebear.com/api/initials/${encodeURIComponent(
       'Gary Jerry'
     )}.svg`,
@@ -52,5 +52,8 @@ const profiles = [
 ];
 
 exports.seed = function (knex) {
-  return knex('profiles').insert(profiles);
+  return knex('profiles').del()
+  .then(() => {
+    return knex('profiles').insert(profiles)
+  })
 };
