@@ -17,5 +17,5 @@ const assignments = [
 ];
 
 exports.seed = function (knex) {
-  return knex('programs_users').insert(assignments);
+  return knex('program_managers').insert(assignments);
 };
