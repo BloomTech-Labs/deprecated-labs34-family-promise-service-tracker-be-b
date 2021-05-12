@@ -3,27 +3,27 @@ const { okta } = require('../../config/okta');
 
 const findAll = async () => {
   return await knex('profiles')
-    .leftJoin('programs_users', {
-      'profiles.id': 'programs_users.profile_id',
+    .leftJoin('program_managers', {
+      'profiles.profile_id': 'program_managers.profile_id',
     })
     .leftJoin('programs', {
-      'programs_users.program_id': 'programs.id',
+      'program_managers.program_id': 'programs.program_id',
     })
     .select(knex.raw('profiles.*, json_agg(programs.*) as programs'))
-    .groupBy('profiles.id');
+    .groupBy('profiles.profile_id');
 };
 
 const findById = async (id) => {
   return await knex('profiles')
-    .leftJoin('programs_users', {
-      'profiles.id': 'programs_users.profile_id',
+    .leftJoin('program_managers', {
+      'profiles.profile_id': 'program_managers.profile_id',
     })
     .leftJoin('programs', {
-      'programs_users.program_id': 'programs.id',
+      'program_managers.program_id': 'programs.program_id',
     })
     .select(knex.raw('profiles.*, json_agg(programs.*) as programs'))
-    .where({ 'profiles.id': id })
-    .groupBy('profiles.id')
+    .where({ 'profiles.profile_id': id })
+    .groupBy('profiles.profile_id')
     .first();
 };
 
@@ -46,14 +46,14 @@ const update = async (id, updates) => {
       // if request includes a programs array,
       // first wipe existing associations
       if (programs) {
-        await knex('programs_users')
+        await knex('program_managers')
           .where('profile_id', id)
           .delete()
           .transacting(trx);
       }
       // then insert new associations if there are any
       if (programs && programs.length > 0) {
-        await knex('programs_users')
+        await knex('program_managers')
           .insert(
             programs.map((p) => {
               return {
