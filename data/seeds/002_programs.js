@@ -20,5 +20,8 @@ const programs = [
 ];
 
 exports.seed = function (knex) {
-  return knex('programs').insert(programs);
+  return knex('programs').del()
+  .then(() => {
+    return knex('programs').insert(programs)
+  })
 };

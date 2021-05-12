@@ -22,5 +22,5 @@ const providers = [
 ];
 
 exports.seed = function (knex) {
-  return knex('services_providers').insert(providers);
+  return knex('service_providers').insert(providers);
 };
