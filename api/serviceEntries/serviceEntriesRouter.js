@@ -1,9 +1,10 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
 const router = express.Router();
+const ServiceEntry = require('./serviceEntriesModel');
 
 router.get('/', (req, res) => {
-  DB.findAll('service_entries')
+  ServiceEntry.getAll()
     .then((entries) => {
       res.status(200).json(entries);
     })
@@ -14,8 +15,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-
-  DB.findById('service_entries', id)
+  ServiceEntry.getById(id)
     .then((entry) => {
       if (entry) {
         res.status(200).json(entry);
@@ -29,9 +29,10 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  DB.create('service_entries', req.body)
-    .then((newEntry) => {
-      res.status(201).json(newEntry);
+  const entryData = req.body;
+  ServiceEntry.create(entryData)
+    .then((entry) => {
+      res.status(201).json(entry);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -39,7 +40,9 @@ router.post('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-  DB.update('service_entries', req.params.id, req.body)
+  const { id } = req.params;
+  const changes = req.body;
+  ServiceEntry.update(id, changes)
     .then((editedEntry) => {
       res.status(200).json(editedEntry);
     })
