@@ -1,5 +1,6 @@
 const express = require('express');
 const DB = require('../utils/db-helper');
+const Statuses = require('./statusesModel')
 const router = express.Router();
 const { requireAdmin } = require('../middleware/authorization');
 
@@ -16,7 +17,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   const { id } = req.params;
 
-  DB.findById('statuses', id)
+  Statuses.getById(id)
     .then((status) => {
       if (status) {
         res.status(200).json(status);
