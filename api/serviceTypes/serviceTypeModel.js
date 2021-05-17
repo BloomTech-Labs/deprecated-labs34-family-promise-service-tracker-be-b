@@ -2,31 +2,31 @@ const knex = require('../../data/db-config');
 
 const findAll = async () => {
   return await knex('service_types')
-    .leftJoin('services_providers', {
-      'service_types.id': 'services_providers.service_type_id',
+    .leftJoin('service_providers', {
+      'service_types.service_type_id': 'service_providers.service_type_id',
     })
     .leftJoin('profiles', {
-      'services_providers.provider_id': 'profiles.id',
+      'service_providers.profile_id': 'profiles.profile_id',
     })
     .select(
       knex.raw('service_types.*, json_agg(profiles.*) as service_providers')
     )
-    .groupBy('service_types.id');
+    .groupBy('service_types.service_type_id');
 };
 
 const findById = async (id) => {
   return await knex('service_types')
-    .leftJoin('services_providers', {
-      'service_types.id': 'services_providers.service_type_id',
+    .leftJoin('service_providers', {
+      'service_types.service_type_id': 'service_providers.service_type_id',
     })
     .leftJoin('profiles', {
-      'services_providers.provider_id': 'profiles.id',
+      'service_providers.profile_id': 'profiles.profile_id',
     })
     .select(
       knex.raw('service_types.*, json_agg(profiles.*) as service_providers')
     )
-    .where({ 'service_types.id': id })
-    .groupBy('service_types.id')
+    .where({ 'service_types.service_type_id': id })
+    .groupBy('service_types.service_type_id')
     .first();
 };
 
