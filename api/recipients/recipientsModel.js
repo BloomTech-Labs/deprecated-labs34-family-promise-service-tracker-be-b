@@ -7,12 +7,29 @@ const getById = (id) => {
   return knex('recipients').where({ recipient_id: id });
 };
 
-// COMMENTED OUT BECAUSE NOT QUITE FUNCTIONAL BUT NEARLY
-// const patchById = async (id, changes) => {
-//   return await knex('recipients').where({ recipient_id: id }).update(changes);
+const updateById = async (id, changes) => {
+  // await knex('recipients').where({ recipient_id: id }).update(changes);
+  await knex('recipients').where({ recipient_id: id }).update(changes);
+
+  return knex('recipients').where({ recipient_id: id });
+};
+
+// BOTH FUNCTIONS BELOW ARE LOCKED BEHIND FOREIGN KEY CONSTRAINTS
+// TO BE SORTED AS A TEAM
+
+const deleteById = async (id) => {
+  await knex('household_members').where({ recipient_id: id }).del();
+  knex('recipients').where({ recipient_id: id }).del();
+};
+
+// const addRecipient = async (person, ethnicity_id) => {
+//   // await knex('recipients').insert(person);
+
 // };
 module.exports = {
   getAll,
   getById,
-  // patchById,
+  updateById,
+  deleteById,
+  // addRecipient,
 };
