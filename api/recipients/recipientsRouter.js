@@ -27,6 +27,49 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+router.post('/', async (req, res, next) => {
+  try{
+    console.log(req.body)
+    const newRecipient = await Recipients.create(req.body)
+    console.log(newRecipient)
+    res.status(200).json(newRecipient)
+  } catch(err){
+    next(err)
+  }
+})
+
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+  Recipients.update(id, changes)
+    .then((editedEntry) => {
+      res.status(200).json(editedEntry);
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+
+  Recipients.remove(id)
+    .then((count) => {
+      if (count > 0) {
+        res
+          .status(200)
+          .json({ message: `Recipient ${id} has been removed` });
+      } else {
+        res
+          .status(404)
+          .json({ message: `Recipient ${id} could not be found` });
+      }
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
 // COMMENTED OUT BECAUSE NOT QUITE FUNCTIONAL BUT NEARLY
 // update a particular field of a recipient
 // router.patch('/patch/:id', (req, res, next) => {

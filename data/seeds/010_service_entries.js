@@ -2,7 +2,6 @@ const faker = require('faker');
 
 const entries = [
   {
-    service_entries_id: 1,
     service_date:'01-01-2020',
     service_time:'5:00',
     service_type_id: 1,
@@ -13,7 +12,6 @@ const entries = [
     value: 100.00,
   },
   {
-    service_entries_id: 2,
     service_date:'01-01-2020',
     service_time:'5:00',
     service_type_id: 2,
@@ -24,7 +22,6 @@ const entries = [
     value: 425.00,
   },
   {
-    service_entries_id: 3,
     service_date:'01-01-2020',
     service_time:'5:00',
     service_type_id: 3,
@@ -35,7 +32,6 @@ const entries = [
     value: 250.00,
   },
   {
-    service_entries_id: 4,
     service_date:'01-01-2020',
     service_time:'5:00',
     service_type_id: 2,

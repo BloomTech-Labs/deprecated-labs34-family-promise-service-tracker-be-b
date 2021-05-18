@@ -11,7 +11,7 @@ const getById = (id) => {
 const create = async (serviceEntry) => {
   const [id] = await knex('service_entries').insert(
     serviceEntry,
-    'services_entries_id'
+    'service_entries_id'
   );
   return getById(id);
 };
@@ -21,9 +21,14 @@ const update = async (id, changes) => {
   return getById(id);
 };
 
+const remove = async (id) => {
+  return await knex('service_entries').where('service_entries_id', id).del()
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  remove
 };

@@ -7,12 +7,20 @@ const getById = (id) => {
   return knex('recipients').where({ recipient_id: id });
 };
 
-// COMMENTED OUT BECAUSE NOT QUITE FUNCTIONAL BUT NEARLY
-// const patchById = async (id, changes) => {
-//   return await knex('recipients').where({ recipient_id: id }).update(changes);
-// };
+const create = async (newRecipient) => {
+  const id = await knex('recipients').insert(newRecipient, 'recipient_id')
+  console.log(id)
+  return getById(id[0])
+}
+
+const update = async (id, changes) => {
+  await knex('recipients').where('recipient_id', id).update(changes);
+  return getById(id);
+};
+
 module.exports = {
   getAll,
   getById,
-  // patchById,
+  create,
+  update,
 };

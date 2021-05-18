@@ -1,6 +1,5 @@
 const locations = [
   {
-    location_id: 1,
     name: 'Smith Residence',
     country: 'United States of America',
     state: 'Washington',
@@ -9,7 +8,6 @@ const locations = [
     address: '123 Terrance Ave',
   },
   {
-    location_id: 2,
     name: 'California Mission',
     country: 'United States of America',
     state: 'California',
@@ -18,7 +16,6 @@ const locations = [
     address: '5828 Carson Dr',
   },
   {
-    location_id: 3,
     name: 'Massachusetts Shelter',
     country: 'United States of America',
     state: 'Massachusetts',
