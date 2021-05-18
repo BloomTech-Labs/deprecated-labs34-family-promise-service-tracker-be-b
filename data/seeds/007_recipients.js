@@ -1,6 +1,5 @@
 const recipients = [
   {
-    recipient_id: 1,
     firstname: 'Michael',
     middle: 'Joseph',
     lastname: 'Smith',
@@ -12,7 +11,6 @@ const recipients = [
     mental_status: '',
   },
   {
-    recipient_id: 2,
     firstname: 'Jose',
     middle: 'Guadalupe',
     lastname: 'Gutierrez',
@@ -24,7 +22,6 @@ const recipients = [
     mental_status: '',
   },
   {
-    recipient_id: 3,
     firstname: 'Victoria',
     middle: '',
     lastname: 'Nguyen',
@@ -36,7 +33,6 @@ const recipients = [
     mental_status: '',
   },
   {
-    recipient_id: 4,
     firstname: 'Andre',
     middle: '',
     lastname: 'Jackson',

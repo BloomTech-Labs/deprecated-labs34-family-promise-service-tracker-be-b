@@ -53,8 +53,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   const { id } = req.params;
-
-  DB.remove('service_entries', id)
+  ServiceEntry.remove(id)
     .then((count) => {
       if (count > 0) {
         res

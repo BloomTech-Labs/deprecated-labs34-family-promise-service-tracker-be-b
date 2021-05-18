@@ -1,21 +1,17 @@
 const householdMembers = [
   {
-    household_member_id: 1,
     household_id: 1,
     recipient_id: 1,
   },
   {
-    household_member_id: 2,
     household_id: 2,
     recipient_id: 2,
   },
   {
-    household_member_id: 3,
     household_id: 3,
     recipient_id: 3,
   },
   {
-    household_member_id: 4,
     household_id: 4,
     recipient_id: 4,
   },
