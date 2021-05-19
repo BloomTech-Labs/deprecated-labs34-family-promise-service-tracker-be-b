@@ -18,9 +18,16 @@ const update = async (id, changes) => {
   return getById(id);
 };
 
+const remove = async (id) => {
+  await knex('household_members').where('recipient_id', id).del();
+  await knex('recipients').where('recipient_id', id).del();
+  return id
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   update,
+  remove
 };

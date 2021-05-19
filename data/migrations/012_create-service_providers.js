@@ -7,15 +7,14 @@ exports.up = function (knex) {
       .notNullable()
       .references('service_type_id')
       .inTable('service_types')
-      .onUpdate('RESTRICT')
+      .onUpdate('CASCADE')
       .onDelete('RESTRICT');
     tbl
       .string('profile_id')
-      .unsigned()
       .notNullable()
       .references('profile_id')
       .inTable('profiles')
-      .onUpdate('RESTRICT')
+      .onUpdate('CASCADE')
       .onDelete('RESTRICT');
     tbl.timestamps(true, true);
   });

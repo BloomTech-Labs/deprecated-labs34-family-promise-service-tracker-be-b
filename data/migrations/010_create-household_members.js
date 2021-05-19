@@ -8,16 +8,16 @@ exports.up = function(knex) {
         .notNullable()
         .references('household_id')
         .inTable('households')
-        .onUpdate('RESTRICT')
-        .onDelete('RESTRICT');
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
         tbl
         .integer('recipient_id')
         .unsigned()
         .notNullable()
         .references('recipient_id')
         .inTable('recipients')
-        .onUpdate('RESTRICT')
-        .onDelete('RESTRICT');
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
         tbl.timestamps(true, true);
       });
 };

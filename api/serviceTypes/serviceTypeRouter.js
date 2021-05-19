@@ -30,25 +30,34 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', canCrudServiceType, (req, res) => {
-  ServiceTypes.create(req.body)
-    .then((newServiceType) => {
-      res.status(201).json({
-        message: 'New service type created',
-        service_type: newServiceType,
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
+// router.post('/', canCrudServiceType, (req, res) => {
+//   ServiceTypes.create(req.body)
+//     .then((newServiceType) => {
+//       res.status(201).json({
+//         message: 'New service type created',
+//         service_type: newServiceType,
+//       });
+//     })
+//     .catch((err) => {
+//       res.status(500).json({ error: err.message });
+//     });
+// });
+router.post('/', canCrudServiceType, async (req, res, next) => {
+  try{
+    newServiceType = await ServiceTypes.create(req.body)
+    res.status(200).json(newServiceType)
+  }catch(err){
+    next(err)
+  }
+    
+})
 
 router.put('/:id', canCrudServiceType, (req, res) => {
   const update = req.body;
 
   if (Object.keys(update).length > 0) {
     const id = req.params.id;
-    DB.findById('service_types', id)
+    ServiceTypes.findById(id)
       .then(
         ServiceTypes.update(id, update)
           .then((updated) => {
@@ -77,7 +86,7 @@ router.put('/:id', canCrudServiceType, (req, res) => {
 router.delete('/:id', canCrudServiceType, (req, res) => {
   const { id } = req.params;
 
-  DB.remove('service_types', id)
+  ServiceTypes.remove(id)
     .then((count) => {
       if (count > 0) {
         res

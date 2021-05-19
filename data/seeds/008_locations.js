@@ -24,7 +24,6 @@ const locations = [
     address: '492 Beverley Way',
   },
   {
-    location_id: 4,
     name: 'Jackson Residence',
     country: 'United States of America',
     state: 'Colorado',

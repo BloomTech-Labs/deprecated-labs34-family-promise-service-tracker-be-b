@@ -14,11 +14,10 @@ exports.up = function (knex) {
     tbl
       .integer('recipient_id')
       .unsigned()
-      .notNullable()
       .references('recipient_id')
       .inTable('recipients')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('SET NULL');
     tbl
       .integer('location_id')
       .unsigned()
