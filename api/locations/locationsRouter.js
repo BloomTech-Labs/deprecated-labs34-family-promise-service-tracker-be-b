@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Recipients = require('./recipientsModel');
+const Locations = require('./locationsModel');
 
 // return all recipients
 router.get('/', (req, res) => {
-  Recipients.getAll()
-    .then((recipients) => {
-      res.status(200).json(recipients);
+  Locations.getAll()
+    .then((locations) => {
+      res.status(200).json(locations);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -18,9 +18,9 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
   console.log(id);
-  Recipients.getById(id)
-    .then((recipient) => {
-      res.status(200).json(recipient);
+  Locations.getById(id)
+    .then((location) => {
+      res.status(200).json(location);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });
@@ -30,9 +30,9 @@ router.get('/:id', (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try{
     console.log(req.body)
-    const newRecipient = await Recipients.create(req.body)
-    console.log(newRecipient)
-    res.status(200).json(newRecipient)
+    const newLocation = await Locations.create(req.body)
+    console.log(newLocation)
+    res.status(200).json(newLocation)
   } catch(err){
     next(err)
   }
@@ -41,7 +41,7 @@ router.post('/', async (req, res, next) => {
 router.put('/:id', (req, res) => {
   const { id } = req.params;
   const changes = req.body;
-  Recipients.update(id, changes)
+  Locations.update(id, changes)
     .then((editedEntry) => {
       res.status(200).json(editedEntry);
     })
@@ -53,8 +53,8 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
   try{
-    const idRemoved = await Recipients.remove(id)
-    res.status(200).json(`Recipient with ID of ${idRemoved} removed successfully`)
+    const idRemoved = await Locations.remove(id)
+    res.status(200).json(`Location with ID of ${idRemoved} removed successfully`)
   } catch(err){
     next(err)
   }

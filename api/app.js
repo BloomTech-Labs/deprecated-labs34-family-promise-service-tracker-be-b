@@ -27,6 +27,7 @@ const serviceTypeRouter = require('./serviceTypes/serviceTypeRouter');
 const serviceEntryRouter = require('./serviceEntries/serviceEntriesRouter');
 const dsRouter = require('./dsService/dsRouter');
 const recipientsRouter = require('./recipients/recipientsRouter');
+const locationsRouter = require('./locations/locationsRouter')
 
 const app = express();
 
@@ -62,6 +63,7 @@ app.use(['/api/service_type', '/api/service_types'], serviceTypeRouter);
 app.use(['/api/service_entry', '/api/service_entries'], serviceEntryRouter);
 app.use('/data', dsRouter);
 app.use(['/api/recipient', '/api/recipients'], recipientsRouter);
+app.use(['/api/location', '/api/locations'], locationsRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

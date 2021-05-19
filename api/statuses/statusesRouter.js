@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
   Statuses.getById(id)
     .then((status) => {
       if (status) {
-        res.status(200).json(status);
+        res.status(200).json(status[0]);
       } else {
         res.status(404).json({ error: `Status ${id} not found` });
       }
@@ -41,7 +41,7 @@ router.post('/', requireAdmin, (req, res) => {
 });
 
 router.put('/:id', requireAdmin, (req, res) => {
-  DB.update('statuses', req.params.id, req.body)
+  Statuses.update(req.params.id, req.body)
     .then((editedStatus) => {
       res.status(200).json({
         message: `Status ${req.params.id} updated`,
@@ -56,7 +56,7 @@ router.put('/:id', requireAdmin, (req, res) => {
 router.delete('/:id', requireAdmin, (req, res) => {
   const { id } = req.params;
 
-  DB.remove('statuses', id)
+  Statuses.remove(id)
     .then((count) => {
       if (count > 0) {
         res.status(200).json({ message: `Status ${id} has been removed` });

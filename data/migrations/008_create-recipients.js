@@ -12,7 +12,7 @@ exports.up = function(knex) {
         .references('ethnicity_id')
         .inTable('ethnicity')
         .onUpdate('CASCADE')
-        .onDelete('RESTRICT');
+        .onDelete('CASCADE');
         tbl.string('email', 128)
         tbl.string('phone', 128)
         tbl.integer('age').unsigned()
