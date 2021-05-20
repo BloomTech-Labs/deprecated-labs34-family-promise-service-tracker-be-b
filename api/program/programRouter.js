@@ -33,7 +33,7 @@ router.get('/:id', (req, res) => {
 router.post('/name', (req, res) => {
   const { name } = req.body;
 
-  Programs.findBy({ name: name })
+  Programs.findByX({ name: name })
     .then((program) => {
       res.status(200).json(program);
     })
@@ -89,5 +89,19 @@ router.delete('/:id', canCrudServiceType, (req, res) => {
       res.status(500).json({ error: err.message });
     });
 });
+
+router.get('/profile/:id', (req, res, next) => {
+  // const id = req.params; // should just be == to :id in path
+  const profId = req.params.id;
+  Programs.findByProfileId(profId)
+    .then((program) => {
+      res.status(200).json(program);
+    })
+    .catch((err) => {
+      res.status(500).json({ message: err.message });
+    });
+});
+
+module.exports = router;
 
 module.exports = router;
