@@ -15,7 +15,7 @@ const findByProfileId = async (profile_id) => {
     which programs it is related to
   */
   const p_mTable = await knex('program_managers').where({
-    program_manager_id: profile_id,
+    profile_id: profile_id,
   });
   // use forEach to return all profile_id's
   let idArr = [];
