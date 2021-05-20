@@ -42,7 +42,7 @@ router.post('/name', (req, res) => {
     });
 });
 
-router.post('/type', (req, res) => {
+router.get('/type', (req, res) => {
   const { type } = req.body;
 
   Programs.findBy({ type: type })
@@ -54,7 +54,7 @@ router.post('/type', (req, res) => {
     });
 });
 
-router.post('/', canCrudServiceType, (req, res) => {
+router.get('/', canCrudServiceType, (req, res) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
@@ -101,7 +101,5 @@ router.get('/profile/:id', (req, res, next) => {
       res.status(500).json({ message: err.message });
     });
 });
-
-module.exports = router;
 
 module.exports = router;
