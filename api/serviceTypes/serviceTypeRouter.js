@@ -30,18 +30,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// router.post('/', canCrudServiceType, (req, res) => {
-//   ServiceTypes.create(req.body)
-//     .then((newServiceType) => {
-//       res.status(201).json({
-//         message: 'New service type created',
-//         service_type: newServiceType,
-//       });
-//     })
-//     .catch((err) => {
-//       res.status(500).json({ error: err.message });
-//     });
-// });
 router.post('/', canCrudServiceType, async (req, res, next) => {
   try{
     newServiceType = await ServiceTypes.create(req.body)

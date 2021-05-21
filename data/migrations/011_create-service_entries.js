@@ -34,6 +34,7 @@ exports.up = function (knex) {
       .onUpdate('CASCADE')
       .onDelete('RESTRICT');
     tbl.integer('quantity').unsigned();
+    tbl.string('unit')
     tbl.decimal('value');
     tbl.timestamps(true, true);
   });

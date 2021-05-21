@@ -9,6 +9,7 @@ const entries = [
     location_id: 1,
     status_id: 2,
     quantity: 3,
+    unit: 'bus passes',
     value: 100.00,
   },
   {
@@ -19,6 +20,7 @@ const entries = [
     location_id: 2,
     status_id: 4,
     quantity: 3,
+    unit: 'meals',
     value: 425.00,
   },
   {
@@ -29,6 +31,7 @@ const entries = [
     location_id: 3,
     status_id: 2,
     quantity: 3,
+    unit: 'books',
     value: 250.00,
   },
   {
@@ -39,6 +42,7 @@ const entries = [
     location_id: 4,
     status_id: 3,
     quantity: 3,
+    unit: 'meals',
     value: 500.00,
   },
 ];
