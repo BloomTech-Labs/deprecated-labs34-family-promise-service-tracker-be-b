@@ -30,31 +30,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/name', (req, res) => {
-  const { name } = req.body;
-
-  Programs.findByX({ name: name })
-    .then((program) => {
-      res.status(200).json(program);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-router.get('/type', (req, res) => {
-  const { type } = req.body;
-
-  Programs.findBy({ type: type })
-    .then((program) => {
-      res.status(200).json(program);
-    })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
-});
-
-router.get('/', canCrudServiceType, (req, res) => {
+router.post('/', (req, res) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
@@ -64,29 +40,28 @@ router.get('/', canCrudServiceType, (req, res) => {
     });
 });
 
-router.put('/:id', canCrudServiceType, (req, res) => {
-  DB.update('programs', req.params.id, req.body)
-    .then((editedProgram) => {
-      res.status(200).json(editedProgram);
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
+
+  // res.json({ id: id, changes: changes });
+  Programs.updateById(id, changes)
+    .then((program) => {
+      res.status(200).json(program);
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ Error: err.message });
     });
 });
 
-router.delete('/:id', canCrudServiceType, (req, res) => {
+router.delete('/:id', (req, res) => {
   const { id } = req.params;
-
-  DB.remove('programs', id)
-    .then((count) => {
-      if (count > 0) {
-        res.status(200).json({ message: `Program ${id} has been removed` });
-      } else {
-        res.status(404).json({ message: `Program ${id} could not be found` });
-      }
+  Programs.deleteById(id)
+    .then((program) => {
+      res.status(200).json(program);
     })
     .catch((err) => {
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ Error: err.message });
     });
 });
 
