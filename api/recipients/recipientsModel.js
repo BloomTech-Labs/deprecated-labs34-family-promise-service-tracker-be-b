@@ -1,10 +1,14 @@
 const knex = require('../../data/db-config');
 const getAll = () => {
-  return knex('recipients');
+  return knex('recipients')
+  .join('ethnicity', 'recipients.ethnicity_id', 'ethnicity.ethnicity_id')
+  .select('recipients.recipient_id', 'recipients.firstname', 'recipients.middle', 'recipients.lastname', 'ethnicity', 'email', 'phone', 'age', 'veteran', 'mental_status', 'created_at', 'updated_at');
 };
 
 const getById = (id) => {
-  return knex('recipients').where({ recipient_id: id });
+  return knex('recipients').where({ recipient_id: id })
+  .join('ethnicity', 'recipients.ethnicity_id', 'ethnicity.ethnicity_id')
+  .select('recipients.recipient_id', 'recipients.firstname', 'recipients.middle', 'recipients.lastname', 'ethnicity', 'email', 'phone', 'age', 'veteran', 'mental_status', 'created_at', 'updated_at').first();
 };
 
 const create = async (newRecipient) => {
