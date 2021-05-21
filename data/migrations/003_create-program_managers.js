@@ -7,16 +7,16 @@ exports.up = function (knex) {
       .notNullable()
       .references('program_id')
       .inTable('programs')
-      .onUpdate('RESTRICT')
-      .onDelete('RESTRICT');
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl
       .string('profile_id')
       .unsigned()
       .notNullable()
       .references('profile_id')
       .inTable('profiles')
-      .onUpdate('RESTRICT')
-      .onDelete('RESTRICT');
+      .onUpdate('CASCADE')
+      .onDelete('CASCADE');
     tbl.timestamps(true, true);
   });
 };

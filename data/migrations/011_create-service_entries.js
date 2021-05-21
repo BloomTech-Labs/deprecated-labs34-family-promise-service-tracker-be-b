@@ -10,7 +10,7 @@ exports.up = function (knex) {
       .references('service_type_id')
       .inTable('service_types')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl
       .integer('recipient_id')
       .unsigned()
@@ -24,7 +24,7 @@ exports.up = function (knex) {
       .references('location_id')
       .inTable('locations')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl
       .integer('status_id')
       .unsigned()
@@ -32,7 +32,7 @@ exports.up = function (knex) {
       .references('status_id')
       .inTable('statuses')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl.integer('quantity').unsigned();
     tbl.string('unit')
     tbl.decimal('value');

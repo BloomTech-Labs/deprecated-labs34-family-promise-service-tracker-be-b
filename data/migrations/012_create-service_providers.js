@@ -8,14 +8,14 @@ exports.up = function (knex) {
       .references('service_type_id')
       .inTable('service_types')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl
       .string('profile_id')
       .notNullable()
       .references('profile_id')
       .inTable('profiles')
       .onUpdate('CASCADE')
-      .onDelete('RESTRICT');
+      .onDelete('CASCADE');
     tbl.timestamps(true, true);
   });
 };
