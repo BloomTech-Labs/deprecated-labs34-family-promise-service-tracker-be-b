@@ -1,4 +1,5 @@
 const express = require('express');
+const { validateRecipient } = require('./recipientsMiddleware');
 const router = express.Router();
 const Recipients = require('./recipientsModel');
 
@@ -27,18 +28,18 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
-router.post('/', async (req, res, next) => {
-  try{
-    console.log(req.body)
-    const newRecipient = await Recipients.create(req.body)
-    console.log(newRecipient)
-    res.status(200).json(newRecipient)
-  } catch(err){
-    next(err)
+router.post('/', validateRecipient, async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const newRecipient = await Recipients.create(req.body);
+    console.log(newRecipient);
+    res.status(200).json(newRecipient);
+  } catch (err) {
+    next(err);
   }
-})
+});
 
-router.put('/:id', (req, res) => {
+router.put('/:id', validateRecipient, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
   Recipients.update(id, changes)
@@ -52,11 +53,13 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
-  try{
-    const idRemoved = await Recipients.remove(id)
-    res.status(200).json(`Recipient with ID of ${idRemoved} removed successfully`)
-  } catch(err){
-    next(err)
+  try {
+    const idRemoved = await Recipients.remove(id);
+    res
+      .status(200)
+      .json(`Recipient with ID of ${idRemoved} removed successfully`);
+  } catch (err) {
+    next(err);
   }
 });
 

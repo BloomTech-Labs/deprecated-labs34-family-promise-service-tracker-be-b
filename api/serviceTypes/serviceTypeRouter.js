@@ -1,8 +1,8 @@
 const express = require('express');
 const ServiceTypes = require('./serviceTypeModel');
-const DB = require('../utils/db-helper');
 const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
+const { validateService } = require('./serviceTypeMiddleware');
 
 router.get('/', (req, res) => {
   ServiceTypes.findAll()
@@ -30,17 +30,21 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', canCrudServiceType, async (req, res, next) => {
-  try{
-    newServiceType = await ServiceTypes.create(req.body)
-    res.status(200).json(newServiceType)
-  }catch(err){
-    next(err)
+router.post(
+  '/',
+  canCrudServiceType,
+  validateService,
+  async (req, res, next) => {
+    try {
+      newServiceType = await ServiceTypes.create(req.body);
+      res.status(200).json(newServiceType);
+    } catch (err) {
+      next(err);
+    }
   }
-    
-})
+);
 
-router.put('/:id', canCrudServiceType, (req, res) => {
+router.put('/:id', canCrudServiceType, validateService, (req, res) => {
   const update = req.body;
 
   if (Object.keys(update).length > 0) {

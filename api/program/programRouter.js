@@ -3,8 +3,9 @@ const DB = require('../utils/db-helper');
 const Programs = require('./programModel');
 const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
+const { validateProgram } = require('./programMiddleware');
 
-router.get('/', (req, res) => {
+router.get('/', canCrudServiceType, (req, res) => {
   Programs.findAll()
     .then((programs) => {
       res.status(200).json(programs);
@@ -14,7 +15,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', canCrudServiceType, (req, res) => {
   const { id } = req.params;
 
   Programs.findById(id)
@@ -30,7 +31,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', canCrudServiceType, validateProgram, (req, res) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
@@ -40,7 +41,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', canCrudServiceType, validateProgram, (req, res) => {
   const { id } = req.params;
   const changes = req.body;
 
@@ -54,7 +55,7 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', canCrudServiceType, (req, res) => {
   const { id } = req.params;
   Programs.deleteById(id)
     .then((program) => {
@@ -65,7 +66,7 @@ router.delete('/:id', (req, res) => {
     });
 });
 
-router.get('/profile/:id', (req, res, next) => {
+router.get('/profile/:id', canCrudServiceType, (req, res, next) => {
   // const id = req.params; // should just be == to :id in path
   const profId = req.params.id;
   Programs.findByProfileId(profId)
