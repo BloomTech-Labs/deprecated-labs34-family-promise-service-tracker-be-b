@@ -11,41 +11,52 @@ const requireAdmin = (req, res, next) => {
 
 const canCrudServiceType = async (req, res, next) => {
   // admins can always create service types
-  if (req.profile.role == 'administrator') {
-    next();
+  if (req.params.program_id) {
+    if (req.profile.role == 'administrator') {
+      next();
 
-    // program managers can only create service types for
-    // programs they are associated with
-  } else if (req.profile.role == 'program_manager') {
-    try {
-      // if this is create, the program is in req body
-      // otherwise need to look up the service_type to
-      // get the program id
-      const program = req.body.program_id
-        ? [req.body.program_id]
-        : getProgramFromServiceType(req.params.id);
+      // program managers can only create service types for
+      // programs they are associated with
+    } else if (req.profile.role == 'program_manager') {
+      try {
+        // if this is create, the program is in req body
+        // otherwise need to look up the service_type to
+        // get the program id
+        const program = req.body.program_id
+          ? [req.body.program_id]
+          : getProgramFromServiceType(req.params.id);
 
-      const canCrud = await isAssignedToProgram(req.profile, program[0]);
-      canCrud
-        ? next()
-        : next(
-            createError(
-              401,
-              'User not authorized to update services on this program'
-            )
-          );
-      // since multiple areas could fail here, pass it along directly
-    } catch (err) {
-      next(createError(500, err));
+        const canCrud = await isAssignedToProgram(req.profile, program[0]);
+        canCrud
+          ? next()
+          : next(
+              createError(
+                401,
+                'User not authorized to update services on this program'
+              )
+            );
+        // since multiple areas could fail here, pass it along directly
+      } catch (err) {
+        next(createError(500, err));
+      }
+    } else {
+      // no other user role can create or edit service types
+      next(
+        createError(
+          401,
+          'Service providers not authorized to perform this action'
+        )
+      );
     }
   } else {
-    // no other user role can create or edit service types
-    next(
-      createError(
-        401,
-        'Service providers not authorized to perform this action'
-      )
-    );
+    if (
+      req.profile.role == 'adminstrator' ||
+      req.profile.role == 'program_manager'
+    ) {
+      next();
+    } else {
+      next(createError(401, 'Not authorized to perform this action. Shoo.'));
+    }
   }
 };
 

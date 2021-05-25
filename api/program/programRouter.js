@@ -5,7 +5,7 @@ const router = express.Router();
 const { canCrudServiceType } = require('../middleware/authorization');
 const { validateProgram } = require('./programMiddleware');
 
-router.get('/', canCrudServiceType, (req, res) => {
+router.get('/', (req, res) => {
   Programs.findAll()
     .then((programs) => {
       res.status(200).json(programs);
@@ -15,7 +15,7 @@ router.get('/', canCrudServiceType, (req, res) => {
     });
 });
 
-router.get('/:id', canCrudServiceType, (req, res) => {
+router.get('/:id', (req, res) => {
   const { id } = req.params;
 
   Programs.findById(id)
@@ -31,7 +31,7 @@ router.get('/:id', canCrudServiceType, (req, res) => {
     });
 });
 
-router.post('/', canCrudServiceType, validateProgram, (req, res) => {
+router.post('/', validateProgram, (req, res) => {
   DB.create('programs', req.body)
     .then((newProgram) => {
       res.status(201).json(newProgram);
