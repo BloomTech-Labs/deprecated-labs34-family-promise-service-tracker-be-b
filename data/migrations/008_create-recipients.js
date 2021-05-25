@@ -13,6 +13,13 @@ exports.up = function(knex) {
         .inTable('ethnicity')
         .onUpdate('CASCADE')
         .onDelete('CASCADE');
+        tbl
+        .integer('household_id')
+        .unsigned()
+        .references('household_id')
+        .inTable('households')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
         tbl.string('email', 128)
         tbl.string('phone', 128)
         tbl.integer('age').unsigned()
