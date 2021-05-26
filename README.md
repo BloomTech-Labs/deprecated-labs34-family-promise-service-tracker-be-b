@@ -6,6 +6,15 @@ Family Promise needs a way to track and visualize the services they provide exte
 
 Our goal is to build a generalizable monitoring and evaluation (M&E) platform that meets Family Promise's needs, with an eye toward additional potential use cases that would be useful for many other organizations.
 
+
+### Back-End Team
+| [Trenten Grede](https://github.com/Tgrede) | [Diego Roman ](https://github.com/Diegormnv) | [D'Artagnan von Pingel](https://github.com/dvonpingel) | [Remy Vila](https://github.com/RemyVila) | [Declan Casey](https://github.com/declan-casey) | [Anthony Catanzariti](https://github.com/apcatanzariti) |
+| --- | --- | --- | --- | --- | --- |
+| <img src="https://avatars.githubusercontent.com/u/15914068?s=400&u=0fc67f6a406f42024c30ba12a19778921ab755d4&v=4" width="200" align="center"/> | <img src="https://avatars.githubusercontent.com/u/72019243?v=4" width="200" align="center"/> | <img src="https://avatars.githubusercontent.com/u/70601119?v=4" width="200" align="center"/> | <img src="https://avatars.githubusercontent.com/u/71950482?v=4" width="200" align="center"/> | <img src="https://avatars.githubusercontent.com/u/73033132?v=4" width="200" align="center"/> |  <img src="https://avatars.githubusercontent.com/u/74742085?v=4" width="200" align="center"/> |
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/trenteng/) [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Tgrede) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">]( https://www.linkedin.com/in/diego-roman-743897142/) [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/Diegormnv) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/dartagnan-von-pingel) [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/dvonpingel) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/remy-vila-657514134/) [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/RemyVila) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/declan-casey-63bb431bb/) [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/declan-casey) | [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15">](https://www.linkedin.com/in/anthony-catanzariti/) [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/apcatanzariti) |
+<br>
+<br>
+
 ## Status
 Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
 
