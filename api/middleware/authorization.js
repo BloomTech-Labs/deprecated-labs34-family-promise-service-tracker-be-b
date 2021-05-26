@@ -11,7 +11,7 @@ const requireAdmin = (req, res, next) => {
 
 const canCrudServiceType = async (req, res, next) => {
   // admins can always create service types
-  if (req.params.program_id) {
+  if (req.params.id) {
     if (req.profile.role == 'administrator') {
       next();
 
