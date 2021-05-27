@@ -1,6 +1,6 @@
 # API Endpoints
 
-Server is deployed at: https://fp-service-tracker.herokuapp.com/
+Server is deployed at: https://fp-service-tracker-b.herokuapp.com/
 
 All endpoints except for index require a valid Okta token for authorization. The authorization specifications for each table below refer to authorization beyond having a valid token.
 
@@ -99,7 +99,7 @@ program object returned on GET requests:
 
 ```
 {
-    id:int,
+    program_id:int,
     name:string,
     type:string,
     description:string,
@@ -137,8 +137,8 @@ status object returned on GET requests:
 
 ```
 {
-    id:int,
-    name:string,
+    status_id:int,
+    status:string,
     created_at:datetime,
     updated_at:datetime
 }
@@ -148,7 +148,7 @@ To create or edit a status:
 
 ```
 {
-    "name":"Desired change as string"
+    "status":"Desired change as string"
 }
 ```
 
@@ -166,11 +166,11 @@ Service Type object returned on GET requests:
 
 ```
 {
-    id:int,
-    name:string,
+    service_type_id:int,
+    service:string,
     description: string,
-    program_id: int,
-    service_providers: array of profile objects
+    program: [array of program names]
+    service_providers: [array of profile objects]
     created_at:datetime string,
     updated_at:datetime string,
 }
@@ -222,3 +222,154 @@ If user X was already assigned to this service type, and you want to also add us
 | /api/service_entries     | POST   | service_type_id, provided_at, status_id, provider_id | must be admin or a program manager or a service provider associated with this service type |
 | /api/service_entries/:id | PUT    | id, any edits                                        | must be admin or a program manager or a service provider associated with this service type |
 | /api/service_entries/:id | DELETE | none                                                 | must be admin or a program manager or a service provider associated with this service type |
+
+Service Entry object returned from [GET] request
+
+```
+{
+    "service_entries_id": int,
+    "service_date": date,
+    "service_time": time,
+    "quantity": int,
+    "unit": string,
+    "value": decimal,
+    "service_name": string,
+    "firstname": string,
+    "lastname": string,
+    "age": int,
+    "email": string,
+    "phone": string,
+    "location": string,
+    "state": string,
+    "city": string,
+    "zip": string,
+    "address": string,
+    "status": string
+}
+```
+[POST] and [PUT] requests ONLY work with id numbers, rather than actual strings and int data
+For example you can add or delete an entry with information like this -
+
+```
+{
+    "quantity": 3,
+    "unit": "mealsssss",
+    "value": "425.00",
+    "recipient_id": 2
+}
+```
+
+This data will work and it will update the recipient to the one matching recipient_id
+
+So the absolute basic functionality works but the database tables need to be properly joined to each other using knex to perform inserts into multiple tables in one transaction.
+
+
+## Locations
+
+| Path               | Method | Requirements     | Authorization |
+| ------------------ | ------ | ---------------- | ---- |
+| /api/locations     | GET    | none             | none |
+| /api/locations/:id | GET    | none             | none |
+| /api/locations     | POST   | name, program_id | none |
+| /api/locations/:id | PUT    | id, any edits    | none |
+| /api/locations/:id | DELETE | none             | none |
+
+locations returned on GET requests:
+
+```
+{
+    "location_id": int,
+    "name": string,
+    "country": string,
+    "state": string,
+    "city": string,
+    "zip": string,
+    "address": string,
+    "created_at": date,
+    "updated_at": date
+}
+```
+
+
+to [POST] a location:
+
+```
+{
+    "name": string,
+    "country": string,
+    "state": string,
+    "city": string,
+    "zip": string,
+    "address": string,
+}
+```
+
+To [PUT] a location: 
+Only have to provide data you want to change
+
+```
+{
+    "name": string,
+    "zip": string,
+    "address": string,
+}
+```
+
+
+## Recipients
+
+| Path                | Method | Requirements              | Authorization     |
+| ------------------- | ------ | -----------------------   | ------------------|
+| /api/recipients     | GET    | none                      | none              |
+| /api/recipients/:id | GET    | none                      | none              |
+| /api/recipients     | POST   | first/last name, ethnicity| none              |
+| /api/recipients/:id | PUT    | id, any edits             | none              |
+| /api/recipients/:id | DELETE | none                      | none              |
+
+Recipient object returned on GET requests:
+
+```
+{
+    "recipient_id": 1,
+    "firstname": string,
+    "middle": string,
+    "lastname": string,
+    "ethnicity": string,
+    "household": string,
+    "household_size": int,
+    "household_income": decimal,
+    "location": string,
+    "state": string,
+    "city": string,
+    "zip": string,
+    "address": string,
+    "email": string,
+    "phone": string,
+    "age": int,
+    "veteran": boolean,
+    "mental_status": string,
+    "created_at": date,
+    "updated_at": date
+}
+```
+
+To [POST] a new recipient:
+
+```
+{
+    "firstname": string,
+    "middle": string,
+    "lastname": string,
+    "ethnicity_id": int,
+    "household_id": int,
+    "location_id": int,
+    "email": string,
+    "phone": string,
+    "age": int,
+    "veteran": boolean,
+    "mental_status": string,
+}
+```
+
+To [PUT]:
+provide the values you would like to update only

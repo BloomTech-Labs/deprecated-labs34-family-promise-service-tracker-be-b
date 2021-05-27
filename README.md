@@ -49,7 +49,10 @@ There are 3 options to get postgresql installed locally [Choose one]:
 
 1. Use docker. [Install](https://docs.docker.com/get-docker/) for your platform
     - run: `docker-compose up -d` to start up the postgresql database and pgadmin.
+    - NOTE: if the above command does not work, try running it without the -d
     - Open a browser to [pgadmin](http://localhost:5050/) and you should see the Dev server already defined.
+    - you will need to login using the `PGADMIN_DEFAULT_EMAIL` and `PGADMIN_DEFAULT_PASSWORD` from the `docker-compose.yml` file
+    - once logged in with those credentials you will need to enter the password 'docker' to access the DB.
     - If you need to start over you will need to delete the folder `$ rm -rf ./data/pg` as this is where all of the server data is stored.
     - if the database `api-dev` was not created then start over.
 2. Download and install postgresql directly from the [main site](https://www.postgresql.org/download/)
@@ -75,4 +78,4 @@ There are 3 options to get postgresql installed locally [Choose one]:
 ### Additional documentation
 - The current API documentation is found in /api/API-README.md
 - List of known issues is found in /known-defects.md
-
+- Backend database designs found [here](https://whimsical.com/db-info-4DyAKKuHwr16LrCCejwtev)
