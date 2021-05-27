@@ -16,7 +16,7 @@ Our goal is to build a generalizable monitoring and evaluation (M&E) platform th
 <br>
 
 ## Status
-Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-33-301d3f1b37564f11b6e0a399a5ca8365), all activity tracked in [Trello](https://trello.com/b/8Y9zYr3n/family-promise-service-tracker-labs-33).
+Current Roadmap in [Notion](https://www.notion.so/Roadmap-Family-Promise-Service-Tracker-Labs-34-cfc13e83f2e849c98056fee3890c9272), all activity tracked in [Trello](https://trello.com/b/48DG97Ae/labs-34-family-promise-service-tracker-team-b).
 
 ## Requirements
 Details on the Labs Node Scaffolding here: <https://docs.labs.lambdaschool.com/labs-api-strarter/>
